@@ -45,6 +45,14 @@ const Navbar: React.FC = () => {
                 <span className="nav-icon">📈</span>
                 Trading
               </Link>
+              <Link 
+                to="/settings" 
+                className={`nav-item ${isActive('/settings') ? 'active' : ''}`}
+                onClick={() => setIsMenuOpen(false)}
+              >
+                <span className="nav-icon">⚙️</span>
+                Settings
+              </Link>
               
               <div className="user-section">
                 <div className="user-info">

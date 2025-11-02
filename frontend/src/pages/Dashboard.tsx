@@ -289,11 +289,11 @@ const Dashboard: React.FC = () => {
             <div className="action-description">View detailed market analysis</div>
           </Link>
           
-          <div className="action-card">
+          <Link to="/settings" className="action-card">
             <div className="action-icon">⚙️</div>
             <div className="action-title">Settings</div>
             <div className="action-description">Configure preferences</div>
-          </div>
+          </Link>
         </div>
       </div>
 
