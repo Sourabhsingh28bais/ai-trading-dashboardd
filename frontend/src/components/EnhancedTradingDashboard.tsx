@@ -208,7 +208,7 @@ const EnhancedTradingDashboard: React.FC = () => {
 
     console.log('📊 Search results:', mockResults.length, 'stocks found');
     setSearchResults(mockResults);
-  };
+  }, []);
 
   const generateMockData = (symbol: string, days: number): MarketData[] => {
     const data: MarketData[] = [];
