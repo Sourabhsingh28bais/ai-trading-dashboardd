@@ -236,11 +236,22 @@ const TradingViewChart: React.FC<TradingViewChartProps> = ({
           <span className="current-price">{formatCurrency(currentPrice)}</span>
           <span className={`price-change ${priceChange >= 0 ? 'positive' : 'negative'}`}>
             {priceChange >= 0 ? '+' : ''}{priceChange.toFixed(2)} 
-            ({((priceChange / currentPrice) * 100).toFixed(2)}%)
+            ({changePercent.toFixed(2)}%)
           </span>
         </div>
-        <div className="volume-info">
-          <span>Volume: {volume.toLocaleString()}</span>
+        <div className="market-info">
+          <div className="volume-info">
+            <span>Volume: {volume.toLocaleString()}</span>
+          </div>
+          <div className="market-status">
+            <span className={`status-dot ${marketDataService.isMarketOpen() ? 'open' : 'closed'}`}></span>
+            <span>{marketStatus}</span>
+          </div>
+          {lastUpdate && (
+            <div className="last-update">
+              <span>Last: {lastUpdate}</span>
+            </div>
+          )}
         </div>
       </div>
       
