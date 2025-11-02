@@ -284,11 +284,26 @@ const EnhancedTradingDashboard: React.FC = () => {
     const debounceTimer = setTimeout(() => {
       if (searchQuery) {
         searchStocks(searchQuery);
+      } else {
+        setSearchResults([]);
       }
     }, 300);
 
     return () => clearTimeout(debounceTimer);
   }, [searchQuery]);
+
+  // Close search dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const searchContainer = document.querySelector('.search-container');
+      if (searchContainer && !searchContainer.contains(event.target as Node)) {
+        setShowSearch(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   const renderCandlestickChart = () => {
     if (!marketData.length) return null;
@@ -380,22 +395,29 @@ const EnhancedTradingDashboard: React.FC = () => {
               onFocus={() => setShowSearch(true)}
               className="stock-search"
             />
-            {showSearch && searchResults.length > 0 && (
+            {showSearch && searchQuery.length >= 2 && (
               <div className="search-results">
-                {searchResults.map((result, index) => (
-                  <div
-                    key={index}
-                    className="search-result-item"
-                    onClick={() => {
-                      setSelectedSymbol(result.symbol);
-                      setSearchQuery('');
-                      setShowSearch(false);
-                    }}
-                  >
-                    <span className="symbol">{result.symbol}</span>
-                    <span className="name">{result.name}</span>
+                {searchResults.length > 0 ? (
+                  searchResults.map((result, index) => (
+                    <div
+                      key={index}
+                      className="search-result-item"
+                      onClick={() => {
+                        setSelectedSymbol(result.symbol);
+                        setSearchQuery('');
+                        setShowSearch(false);
+                      }}
+                    >
+                      <span className="symbol">{result.symbol}</span>
+                      <span className="name">{result.name}</span>
+                      <span className="exchange">{result.exchange}</span>
+                    </div>
+                  ))
+                ) : (
+                  <div className="search-no-results">
+                    <span>No stocks found for "{searchQuery}"</span>
                   </div>
-                ))}
+                )}
               </div>
             )}
           </div>
