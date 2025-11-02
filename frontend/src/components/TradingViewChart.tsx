@@ -19,8 +19,11 @@ const TradingViewChart: React.FC<TradingViewChartProps> = ({
   const [candleData, setCandleData] = useState<CandleData[]>([]);
   const [currentPrice, setCurrentPrice] = useState<number>(0);
   const [priceChange, setPriceChange] = useState<number>(0);
+  const [changePercent, setChangePercent] = useState<number>(0);
   const [volume, setVolume] = useState<number>(0);
   const [isLoading, setIsLoading] = useState(true);
+  const [marketStatus, setMarketStatus] = useState<string>('');
+  const [lastUpdate, setLastUpdate] = useState<string>('');
 
   // Generate realistic market data
   const generateMarketData = (symbol: string, days: number = 100): CandleData[] => {
