@@ -384,17 +384,32 @@ const EnhancedTradingDashboard: React.FC = () => {
         </div>
         <div className="header-right">
           <div className="search-container">
-            <input
-              type="text"
-              placeholder="Search stocks..."
-              value={searchQuery}
-              onChange={(e) => {
-                setSearchQuery(e.target.value);
-                setShowSearch(true);
-              }}
-              onFocus={() => setShowSearch(true)}
-              className="stock-search"
-            />
+            <div className="search-input-wrapper">
+              <span className="search-icon">🔍</span>
+              <input
+                type="text"
+                placeholder="Search stocks (e.g., RELIANCE, TCS)..."
+                value={searchQuery}
+                onChange={(e) => {
+                  setSearchQuery(e.target.value);
+                  setShowSearch(true);
+                }}
+                onFocus={() => setShowSearch(true)}
+                className="stock-search"
+              />
+              {searchQuery && (
+                <button 
+                  className="clear-search"
+                  onClick={() => {
+                    setSearchQuery('');
+                    setSearchResults([]);
+                    setShowSearch(false);
+                  }}
+                >
+                  ✕
+                </button>
+              )}
+            </div>
             {showSearch && searchQuery.length >= 2 && (
               <div className="search-results">
                 {searchResults.length > 0 ? (
