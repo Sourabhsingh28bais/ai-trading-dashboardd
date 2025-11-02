@@ -492,24 +492,50 @@ const EnhancedTradingDashboard: React.FC = () => {
       <div className="main-content">
         {/* Chart Section */}
         <div className="chart-section">
-          <div className="chart-header">
-            <h2>{selectedSymbol} - {timeframe}</h2>
-            {tradingSignal && (
-              <div className={`signal-indicator ${tradingSignal.signal_type.toLowerCase()}`}>
-                {tradingSignal.signal_type === 'BUY' ? '📈' : tradingSignal.signal_type === 'SELL' ? '📉' : '⏸️'}
-                {tradingSignal.signal_type}
+          <div className="chart-header-controls">
+            <div className="chart-title">
+              <h2>{selectedSymbol} - {timeframe}</h2>
+              {tradingSignal && (
+                <div className={`signal-indicator ${tradingSignal.signal_type.toLowerCase()}`}>
+                  {tradingSignal.signal_type === 'BUY' ? '📈' : tradingSignal.signal_type === 'SELL' ? '📉' : '⏸️'}
+                  {tradingSignal.signal_type}
+                </div>
+              )}
+            </div>
+            <div className="view-toggles">
+              <button 
+                className={`toggle-btn ${!showPaperTrading ? 'active' : ''}`}
+                onClick={() => setShowPaperTrading(false)}
+              >
+                📊 Chart Only
+              </button>
+              <button 
+                className={`toggle-btn ${showPaperTrading ? 'active' : ''}`}
+                onClick={() => setShowPaperTrading(true)}
+              >
+                📝 Trading View
+              </button>
+            </div>
+          </div>
+          
+          <div className="trading-layout">
+            <div className={`chart-container ${showPaperTrading ? 'with-trading' : 'full-width'}`}>
+              <TradingViewChart 
+                symbol={selectedSymbol}
+                timeframe={timeframe}
+                onPriceUpdate={setCurrentPrice}
+              />
+            </div>
+            
+            {showPaperTrading && (
+              <div className="trading-panel">
+                <PaperTradingPanel 
+                  selectedSymbol={selectedSymbol}
+                  currentPrice={currentPrice}
+                />
               </div>
             )}
           </div>
-          
-          {loading ? (
-            <div className="chart-loading">
-              <div className="loading-spinner"></div>
-              <p>Loading chart data...</p>
-            </div>
-          ) : (
-            renderCandlestickChart()
-          )}
         </div>
 
         {/* Side Panel */}
