@@ -5,11 +5,13 @@ import Navbar from './components/Navbar';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
+import Settings from './pages/Settings';
 import EnhancedTradingDashboard from './components/EnhancedTradingDashboard';
 import ProtectedRoute from './components/ProtectedRoute';
 import './styles/EnhancedTradingDashboard.css';
 import './styles/Dashboard.css';
 import './styles/Navbar.css';
+import './styles/Settings.css';
 
 function App() {
   return (
@@ -41,6 +43,14 @@ function App() {
               element={
                 <ProtectedRoute>
                   <EnhancedTradingDashboard />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
+              path="/settings" 
+              element={
+                <ProtectedRoute>
+                  <Settings />
                 </ProtectedRoute>
               } 
             />
