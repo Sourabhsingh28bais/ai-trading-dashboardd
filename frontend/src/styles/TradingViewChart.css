@@ -22,7 +22,9 @@
   position: absolute;
   top: 0;
   left: 0;
- righ 
+t: 0;
+  height: 1px;
+  background: lirgba(0,  transparent(90deg,-gradientnear righ 
 
 .chart-header {
   display: flex;
