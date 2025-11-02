@@ -77,7 +77,35 @@ const Dashboard: React.FC = () => {
           const mockPrices = {
             'NIFTY50': 19547.30,
             'SENSEX': 65953.48,
-            'RE
+            'RELIANCE': 2456.75,
+            'TCS': 3542.20,
+            'INFY': 1398.65,
+            'HDFC': 1654.80
+          };
+          marketData.push({
+            symbol: symbol,
+            price: mockPrices[symbol as keyof typeof mockPrices] || 1000,
+            change: (Math.random() - 0.5) * 100,
+            changePercent: (Math.random() - 0.5) * 5
+          });
+        }
+      }
+      
+      setMarketOverview(marketData);
+    } catch (error) {
+      console.error('Failed to fetch market overview:', error);
+      // Complete fallback to mock data
+      const mockData: MarketOverview[] = [
+        { symbol: 'NIFTY50', price: 19547.30, change: 125.40, changePercent: 0.65 },
+        { symbol: 'SENSEX', price: 65953.48, change: -89.83, changePercent: -0.14 },
+        { symbol: 'RELIANCE', price: 2456.75, change: 23.50, changePercent: 0.97 },
+        { symbol: 'TCS', price: 3542.20, change: -15.30, changePercent: -0.43 },
+        { symbol: 'INFY', price: 1398.65, change: 8.90, changePercent: 0.64 },
+        { symbol: 'HDFC', price: 1654.80, change: -12.45, changePercent: -0.75 }
+      ];
+      setMarketOverview(mockData);
+    }
+  };
 
   const fetchRecentSignals = async () => {
     try {
