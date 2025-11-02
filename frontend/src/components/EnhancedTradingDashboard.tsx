@@ -309,74 +309,7 @@ const EnhancedTradingDashboard: React.FC = () => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  const renderCandlestickChart = () => {
-    if (!marketData.length) return null;
-
-    return (
-      <div className="chart-container">
-        <svg width="100%" height="400" className="candlestick-svg">
-          {marketData.map((candle, index) => {
-            const x = (index / marketData.length) * 100;
-            const prices = marketData.map(d => [d.high_price, d.low_price]).flat();
-            const minPrice = Math.min(...prices);
-            const maxPrice = Math.max(...prices);
-            const priceRange = maxPrice - minPrice;
-            
-            const high = ((maxPrice - candle.high_price) / priceRange) * 80 + 10;
-            const low = ((maxPrice - candle.low_price) / priceRange) * 80 + 10;
-            const open = ((maxPrice - candle.open_price) / priceRange) * 80 + 10;
-            const close = ((maxPrice - candle.close_price) / priceRange) * 80 + 10;
-            
-            const isGreen = candle.close_price > candle.open_price;
-            const color = isGreen ? '#00d4aa' : '#e74c3c';
-            
-            return (
-              <g key={index}>
-                {/* Wick */}
-                <line
-                  x1={`${x}%`}
-                  y1={`${high}%`}
-                  x2={`${x}%`}
-                  y2={`${low}%`}
-                  stroke={color}
-                  strokeWidth="1"
-                />
-                {/* Body */}
-                <rect
-                  x={`${x - 0.4}%`}
-                  y={`${Math.min(open, close)}%`}
-                  width="0.8%"
-                  height={`${Math.abs(close - open)}%`}
-                  fill={color}
-                />
-              </g>
-            );
-          })}
-        </svg>
-        
-        {/* Price Labels */}
-        <div className="price-labels">
-          {marketData.length > 0 && (
-            <>
-              <div className="current-price">
-                ₹{marketData[marketData.length - 1].close_price.toFixed(2)}
-              </div>
-              <div className="price-change">
-                {marketData.length > 1 && (
-                  <span className={
-                    marketData[marketData.length - 1].close_price > marketData[marketData.length - 2].close_price 
-                      ? 'positive' : 'negative'
-                  }>
-                    {((marketData[marketData.length - 1].close_price - marketData[marketData.length - 2].close_price) / marketData[marketData.length - 2].close_price * 100).toFixed(2)}%
-                  </span>
-                )}
-              </div>
-            </>
-          )}
-        </div>
-      </div>
-    );
-  };
+  // Removed renderCandlestickChart - now using TradingViewChart component
 
   return (
     <div className="enhanced-trading-dashboard">
