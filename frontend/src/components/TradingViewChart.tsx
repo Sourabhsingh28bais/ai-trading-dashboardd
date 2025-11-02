@@ -1,13 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { marketDataService, MarketTick, CandleData } from '../services/MarketDataService';
 
-interface CandleData {
-  time: number;
-  open: number;
-  high: number;
-  low: number;
-  close: number;
-  volume: number;
-}
+// CandleData interface is now imported from MarketDataService
 
 interface TradingViewChartProps {
   symbol: string;
