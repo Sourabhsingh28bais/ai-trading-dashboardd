@@ -12,6 +12,8 @@ import './styles/EnhancedTradingDashboard.css';
 import './styles/Dashboard.css';
 import './styles/Navbar.css';
 import './styles/Settings.css';
+import './styles/TradingViewChart.css';
+import './styles/PaperTrading.css';
 
 function App() {
   return (
