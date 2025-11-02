@@ -22,9 +22,11 @@
   position: absolute;
   top: 0;
   left: 0;
-t: 0;
-  height: 1px;
-  background: lirgba(0,  transparent(90deg,-gradientnear righ 
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 10% 20%, rgba(0, 212, 170, 0.03) 0%, transparent 50%);
+  pointer-events: none;
+} 
 
 .chart-header {
   display: flex;
