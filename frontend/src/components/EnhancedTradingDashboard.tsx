@@ -316,7 +316,7 @@ const EnhancedTradingDashboard: React.FC = () => {
       {/* Header */}
       <div className="dashboard-header">
         <div className="header-left">
-          <h1>📈 AI Trading Dashboard</h1>
+          <h1>📈 Trading Dashboard</h1>
           <p>Real-time market analysis with advanced technical indicators</p>
         </div>
         <div className="header-right">
